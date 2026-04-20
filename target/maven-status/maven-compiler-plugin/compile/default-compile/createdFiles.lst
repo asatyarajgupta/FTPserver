@@ -1,0 +1,7 @@
+com\kuala\ftpserver\Services\StorageService.class
+com\kuala\ftpserver\Services\FileSystemStorageService.class
+com\kuala\ftpserver\StorageFileNotFoundException.class
+com\kuala\ftpserver\Controllers\FileUploadController.class
+com\kuala\ftpserver\FtPserverApplication.class
+com\kuala\ftpserver\StorageException.class
+com\kuala\ftpserver\StorageProperties.class
