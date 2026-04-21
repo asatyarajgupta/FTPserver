@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -79,8 +78,14 @@ public class FileSystemStorageService implements StorageService {
         }
     }
     @Override
-    public void deleteAll() {
-        FileSystemUtils.deleteRecursively(rootLocation.toFile());
+    public void delete(String filename) {
+        try {
+            Path file = load(filename);
+            Files.deleteIfExists(file);
+
+        } catch (IOException e) {
+            throw new StorageException("Something went wrong son", e);
+        }
     }
     @Override
     public void init() {

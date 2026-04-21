@@ -82,6 +82,7 @@ const Content = styled.main`
 
 // ─── Upload Zone ───────────────────────────────────────────────────────────────
 
+
 const DropZone = styled.div`
   border: 1.5px dashed ${p => p.$dragging ? 'var(--text-primary)' : 'var(--border-strong)'};
   border-radius: var(--radius-xl);
@@ -122,6 +123,24 @@ const DropSub = styled.p`
 
 const HiddenInput = styled.input`
   display: none;
+`;
+
+const DeleteBtn = styled.button`
+  opacity: 0;
+  transition: opacity var(--transition);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  padding: 4px 6px;
+  border-radius: 6px;
+  flex-shrink: 0;
+
+  &:hover {
+    color: var(--danger);
+    background: rgba(201, 64, 64, 0.08);
+  }
 `;
 
 // ─── Progress ─────────────────────────────────────────────────────────────────
@@ -482,6 +501,19 @@ export default function App() {
     a.click();
   }, [API]);
 
+  const deleteFile = useCallback(async (name, e) => {
+  e.stopPropagation(); // prevent triggering the download
+  try {
+    await fetch(`${API}/files/${encodeURIComponent(name)}`, {
+      method: 'DELETE',
+    });
+    showToast(`${name} deleted`);
+    loadFiles();
+  } catch {
+    showToast('Could not delete file');
+  }
+}, [API, loadFiles, showToast]);
+
   // Drag handlers
   const onDragEnter = (e) => {
     e.preventDefault();
@@ -603,6 +635,13 @@ export default function App() {
                       <DownloadHint className="download-hint">
                         ↓ download
                       </DownloadHint>
+                      <DeleteBtn
+                        className="download-hint"
+                        onClick={(e) => deleteFile(name, e)}
+                        title="Delete"
+                      >
+                        ✕
+                      </DeleteBtn>
                     </FileRow>
                   );
                 })
