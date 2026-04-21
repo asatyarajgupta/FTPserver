@@ -69,14 +69,10 @@ Then copy the contents of `frontend/build` into `src/main/resources/static`.
 
 ## Storage
 
-Uploaded files are saved to a local folder on the host machine. The path is configured in `application.properties`:
+Uploaded files are saved to a local folder on the host machine. The path is configured in `StorageProperties`:
 
-```properties
-storage.location=upload-dir
-server.address=0.0.0.0
-```
 
-`server.address=0.0.0.0` is what makes the app reachable across the network instead of just on localhost.
+`server.address=0.0.0.0` in `applciation.properties` is what makes the app reachable across the network instead of just on localhost.
 
 ---
 
