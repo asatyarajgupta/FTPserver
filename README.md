@@ -6,6 +6,8 @@ Built with Spring Boot + React.
 
 ---
 
+<img width="1138" height="883" alt="image" src="https://github.com/user-attachments/assets/c69c5135-384e-43ff-a4d1-6dc977521455" />
+
 ## What it does
 
 - Upload files from any device on the network
